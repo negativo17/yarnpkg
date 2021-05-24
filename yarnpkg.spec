@@ -1,14 +1,14 @@
 %global debug_package %{nil}
 
-Name:           yarn
+Name:           yarnpkg
 Version:        1.22.10
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Fast, reliable, and secure dependency management
 License:        BSD-2-Clause
-URL:            https://github.com/yarnpkg/%{name}
+URL:            https://github.com/%{name}/yarn
 BuildArch:      noarch
 
-Source0:        https://github.com/yarnpkg/%{name}/releases/download/v%{version}/%{name}-v%{version}.tar.gz
+Source0:        https://github.com/%{name}/yarn/releases/download/v%{version}/yarn-v%{version}.tar.gz
 
 Requires:       nodejs
 
@@ -26,7 +26,7 @@ Secure: Yarn uses checksums to verify the integrity of every installed package
 before its code is executed.
 
 %prep
-%autosetup -n %{name}-v%{version}
+%autosetup -n yarn-v%{version}
 
 %build
 # Nothing to build
@@ -36,24 +36,27 @@ mkdir -p %{buildroot}%{_libdir}/%{name}
 cp -a bin lib *.js *.json %{buildroot}%{_libdir}/%{name}
 
 mkdir -p %{buildroot}%{_bindir}/
+ln -sf ../%{_lib}/%{name}/bin/yarn %{buildroot}%{_bindir}/
 ln -sf ../%{_lib}/%{name}/bin/%{name} %{buildroot}%{_bindir}/
-ln -sf ../%{_lib}/%{name}/bin/%{name}pkg %{buildroot}%{_bindir}/
 
 %files
 %license LICENSE
 %doc README.md
+%{_bindir}/yarn
 %{_bindir}/%{name}
-%{_bindir}/%{name}pkg
+%{_libdir}/%{name}/bin/yarn
+%{_libdir}/%{name}/bin/yarn.cmd
+%{_libdir}/%{name}/bin/yarn.js
 %{_libdir}/%{name}/bin/%{name}
 %{_libdir}/%{name}/bin/%{name}.cmd
-%{_libdir}/%{name}/bin/%{name}.js
-%{_libdir}/%{name}/bin/%{name}pkg
-%{_libdir}/%{name}/bin/%{name}pkg.cmd
 %{_libdir}/%{name}/lib/cli.js
 %{_libdir}/%{name}/lib/v8-compile-cache.js
 %{_libdir}/%{name}/package.json
 %{_libdir}/%{name}/preinstall.js
 
 %changelog
+* Mon May 24 2021 Simone Caronni <negativo17@gmail.com> - 1.22.10-2
+- Rename to yarnpkg.
+
 * Sun May 23 2021 Simone Caronni <negativo17@gmail.com> - 1.22.10-1
 - First build from prebuilt binaries.
