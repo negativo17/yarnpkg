@@ -1,7 +1,7 @@
 %global debug_package %{nil}
 
 Name:           yarnpkg
-Version:        1.22.17
+Version:        1.22.18
 Release:        1%{?dist}
 Summary:        Fast, reliable, and secure dependency management
 License:        BSD-2-Clause
@@ -55,6 +55,9 @@ ln -sf ../%{_lib}/%{name}/bin/%{name} %{buildroot}%{_bindir}/
 %{_libdir}/%{name}/preinstall.js
 
 %changelog
+* Sun May 01 2022 Simone Caronni <negativo17@gmail.com> - 1.22.18-1
+- Update to 1.22.18.
+
 * Thu Jan 13 2022 Simone Caronni <negativo17@gmail.com> - 1.22.17-1
 - Update to 1.22.17.
 
